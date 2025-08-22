@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: buddy-agent-service
+
+# security:
+#   jwt:
+#     secret: ${JWT_SECRET:buddy-secret-key-change-in-production}
+#     expiration: 86400000
+
+openai:
+  apiKey: ${OPENAI_API_KEY}
+  chatModel: gpt-4o-mini
+  embeddingModel: text-embedding-3-small
+  baseUrl: https://api.openai.com/v1
+
+memory:
+  baseUrl: http://localhost:8082
+
+tools:
+  baseUrl: http://localhost:8083
+
+logging:
+  level:
+    com.buddy: DEBUG
+    org.springframework.web: INFO

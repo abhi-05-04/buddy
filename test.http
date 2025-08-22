@@ -1,0 +1,72 @@
+### Test Buddy AI API Endpoints
+
+### 1. Test Chat Streaming
+POST http://localhost:8080/api/chat/stream
+Content-Type: application/json
+
+{
+  "message": "Hello Buddy! Can you help me with a task?",
+  "sessionId": "test-session-1"
+}
+
+### 2. Test Tools Specification
+GET http://localhost:8083/api/tools/spec
+
+### 3. Test Notes Tool - Save Note
+POST http://localhost:8083/api/tools/execute/notes
+Content-Type: application/json
+
+{
+  "input": "save: Meeting Notes Important discussion about project timeline"
+}
+
+### 4. Test Notes Tool - List Notes
+POST http://localhost:8083/api/tools/execute/notes
+Content-Type: application/json
+
+{
+  "input": "list"
+}
+
+### 5. Test Notes Tool - Get Note
+POST http://localhost:8083/api/tools/execute/notes
+Content-Type: application/json
+
+{
+  "input": "get: Meeting Notes"
+}
+
+### 6. Test Web Search Tool
+POST http://localhost:8083/api/tools/execute/web_search
+Content-Type: application/json
+
+{
+  "input": "Spring Boot best practices 2024"
+}
+
+### 7. Test Memory Service - Save Message
+POST http://localhost:8082/api/memory/append
+Content-Type: application/json
+
+{
+  "sessionId": "test-session-1",
+  "role": "USER",
+  "content": "Hello Buddy, how are you today?"
+}
+
+### 8. Test Memory Service - Get Context
+POST http://localhost:8082/api/memory/context
+Content-Type: application/json
+
+{
+  "sessionId": "test-session-1"
+}
+
+### 9. Test Agent Service Health
+GET http://localhost:8080/actuator/health
+
+### 10. Test Tools Service Health
+GET http://localhost:8083/actuator/health
+
+### 11. Test Memory Service Health
+GET http://localhost:8082/actuator/health

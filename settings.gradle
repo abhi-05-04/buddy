@@ -1,0 +1,2 @@
+rootProject.name = 'buddy'
+include 'agent-service', 'memory-service', 'tools-service', 'common'
