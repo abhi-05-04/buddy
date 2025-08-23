@@ -21,6 +21,10 @@ public class MemoryService {
     }
     
     public List<Message> getRecentMessages(String sessionId, int limit) {
-        return messageRepository.findBySessionIdOrderByCreatedAtDesc(sessionId, limit);
+        List<Message> allMessages = messageRepository.findBySessionIdOrderByCreatedAtDesc(sessionId);
+        if (limit > 0 && limit < allMessages.size()) {
+            return allMessages.subList(0, limit);
+        }
+        return allMessages;
     }
 }

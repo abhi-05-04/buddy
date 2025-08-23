@@ -11,5 +11,5 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message, Long> {
     
     @Query("SELECT m FROM Message m WHERE m.sessionId = :sessionId ORDER BY m.createdAt DESC")
-    List<Message> findBySessionIdOrderByCreatedAtDesc(@Param("sessionId") String sessionId, int limit);
+    List<Message> findBySessionIdOrderByCreatedAtDesc(@Param("sessionId") String sessionId);
 }
