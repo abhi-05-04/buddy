@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: test
+  security:
+    user:
+      name: testuser
+      password: testpass
+  main:
+    web-application-type: reactive
+
+logging:
+  level:
+    com.buddy.agent: DEBUG
+    org.springframework.security: DEBUG

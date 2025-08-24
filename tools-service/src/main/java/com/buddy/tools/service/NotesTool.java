@@ -9,7 +9,26 @@ import java.util.Map;
 @Component
 public class NotesTool implements Tool {
     
-    private final Map<String, String> notes = new ConcurrentHashMap<>();
+    private final Map<String, NoteData> notes = new ConcurrentHashMap<>();
+    
+    private static class NoteData {
+        private final String title;
+        private final String content;
+        private final long createdAt;
+        private final long updatedAt;
+        
+        public NoteData(String title, String content) {
+            this.title = title;
+            this.content = content;
+            this.createdAt = System.currentTimeMillis();
+            this.updatedAt = System.currentTimeMillis();
+        }
+        
+        public String getTitle() { return title; }
+        public String getContent() { return content; }
+        public long getCreatedAt() { return createdAt; }
+        public long getUpdatedAt() { return updatedAt; }
+    }
     
     @Override
     public String getName() {
@@ -51,7 +70,9 @@ public class NotesTool implements Tool {
         }
         
         StringBuilder result = new StringBuilder("Available notes:\n");
-        notes.keySet().forEach(title -> result.append("- ").append(title).append("\n"));
+        notes.forEach((title, noteData) -> 
+            result.append("- ").append(title).append(" (created: ").append(new java.util.Date(noteData.getCreatedAt())).append(")\n")
+        );
         return ToolResult.success(result.toString());
     }
     
@@ -60,12 +81,12 @@ public class NotesTool implements Tool {
             return ToolResult.failure("Note title cannot be empty");
         }
         
-        String content = notes.get(title);
-        if (content == null) {
+        NoteData noteData = notes.get(title);
+        if (noteData == null) {
             return ToolResult.failure("Note not found: " + title);
         }
         
-        return ToolResult.success("Note: " + title + "\n" + content);
+        return ToolResult.success("Note: " + title + "\n" + noteData.getContent());
     }
     
     private ToolResult saveNote(String input) {
@@ -81,7 +102,7 @@ public class NotesTool implements Tool {
             return ToolResult.failure("Both title and content are required");
         }
         
-        notes.put(title, content);
+        notes.put(title, new NoteData(title, content));
         return ToolResult.success("Note saved successfully: " + title);
     }
 }

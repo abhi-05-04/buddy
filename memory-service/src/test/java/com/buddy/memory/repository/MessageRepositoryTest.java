@@ -41,7 +41,7 @@ class MessageRepositoryTest {
         messageRepository.save(message2);
         messageRepository.save(message3);
         
-        List<Message> session1Messages = messageRepository.findBySessionIdOrderByCreatedAtDesc("session-1", 10);
+        List<Message> session1Messages = messageRepository.findBySessionIdOrderByCreatedAtDesc("session-1");
         
         assertEquals(2, session1Messages.size());
         assertEquals("session-1", session1Messages.get(0).getSessionId());
