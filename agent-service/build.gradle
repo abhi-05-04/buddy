@@ -17,4 +17,9 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3'
     implementation 'com.bucket4j:bucket4j-core:8.7.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    // Test dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'io.projectreactor:reactor-test'
 }

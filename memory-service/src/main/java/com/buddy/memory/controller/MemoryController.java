@@ -8,13 +8,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/memory")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:5173", "http://127.0.0.1:5173", "http://192.168.1.2:5173"}, allowCredentials = "false")
 public class MemoryController {
     
     private final MemoryService memoryService;
     
     public MemoryController(MemoryService memoryService) {
         this.memoryService = memoryService;
+    }
+    
+    @GetMapping("/health")
+    public ResponseEntity<String> health() {
+        return ResponseEntity.ok("OK");
     }
     
     @PostMapping("/append")
